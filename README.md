@@ -1,4 +1,4 @@
-# Predicción de promedio académico y nivel de estrés en estudiantes 🎓🧠📈
+# Predicción de promedio académico y nivel de estrés en estudiantes
 
 Este proyecto aplica técnicas de machine learning para predecir el rendimiento académico y el nivel de estrés de estudiantes a partir de datos personales, hábitos de estudio y características del entorno.
 
