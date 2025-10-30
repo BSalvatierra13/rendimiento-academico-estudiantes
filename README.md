@@ -1,44 +1,51 @@
-# Predicción de promedio académico y nivel de estrés en estudiantes
+# 🎓 Student Performance and Stress Predictive Modeling
 
-Este proyecto aplica técnicas de machine learning para predecir el rendimiento académico y el nivel de estrés de estudiantes a partir de datos personales, hábitos de estudio y características del entorno.
+## Project Overview
 
-## Objetivo
+This project implements a comprehensive Machine Learning pipeline to predict two distinct, yet related, outcomes for students: their **Academic Performance (GPA)** and their **Perceived Stress Level**. The analysis explores the complex interrelationship between personal data, study habits, and environmental factors on student success and well-being.
 
-Explorar la relación entre factores individuales y el desempeño académico, construyendo modelos que permitan anticipar el promedio final y el nivel de estrés percibido.
+The primary goal was not just to achieve high accuracy, but to conduct a **critical comparative analysis** between simple, interpretable models (Linear Regression, Logistic Regression, LDA) and complex ensemble methods (Random Forest, XGBoost). This approach demonstrates a commitment to **model efficiency and parsimony**, a key requirement in real-world ML engineering.
 
-## Modelos utilizados
+## 🎯 Key Predictive Tasks
 
-- Regresión Lineal (para predecir promedio)
-- Regresión Logística (para predecir nivel de estrés)
-- Random Forest
-- XGBoost
-- LDA
-- KNN
+| Task | Objective | Methodologies Explored | Core Metrics |
+| :--- | :--- | :--- | :--- |
+| **Academic Performance** | Predict the final Grade Point Average (GPA), modeling it as a **Regression** problem. | Linear Regression, Random Forest, XGBoost | $R^2$ Coefficient of Determination, MAE (Mean Absolute Error) |
+| **Stress Level** | Classify students into Low, Moderate, or High stress categories (**Multi-class Classification**). | Logistic Regression, LDA, KNN, Random Forest, XGBoost | Accuracy, F1-Score, Confusion Matrix |
 
-## Contenido del repositorio
+## 💡 Analytical Highlights and Conclusions
 
-- `Predicción_de_promedio_academico_y_nivel_de_estrés_en_estudiantes.ipynb`: Notebook con el desarrollo completo del análisis y modelado.
-- Visualizaciones de correlaciones y resultados.
-- Evaluación de modelos con métricas estándar.
+### 1. Model Efficiency Over Complexity
 
-## Herramientas y librerías
+For the classification task (predicting stress and academic success binary outcomes), models based on linear methods, specifically **Logistic Regression and Linear Discriminant Analysis (LDA)**, proved to be the most effective.
 
-- Python 3  
-- `pandas`, `numpy`  
-- `matplotlib`, `seaborn`  
-- `scikit-learn`, `xgboost`
+* These simple models matched or exceeded the performance of highly complex methods like **Random Forest and XGBoost**, even after extensive hyperparameter optimization on the latter.
+* **Conclusion:** This highlights a critical finding: the simplicity of the underlying data relationship meant the extra complexity and computational cost of ensemble models were unnecessary, demonstrating a strong principle of **parsimonious model selection**.
 
-## Evaluación
+### 2. Isolation of the Single Strongest Factor (Univariate Modeling)
 
-- Precisión, matriz de confusión, F1-score (para clasificación de estrés)  
-- MAE y R² (para regresión del promedio académico)
+By selectively isolating variables, a **Univariate Linear Regression Model** was constructed to predict GPA based solely on the variable **'Hours Studied Per Day.'**
 
-## Principales conclusiones
+* **Result:** The model achieved a **Coefficient of Determination ($R^2$) of 0.55**.
+* **Significance:** In a complex, multi-factorial domain like human behavior/education, an $R^2$ of 0.55 using only one predictor is remarkably high. This identified 'Hours Studied Per Day' as the most impactful and actionable variable, confirming a direct and measurable relationship:
+$$
+\text{Predicted GPA} \approx \beta_0 + \beta_1 \cdot (\text{Study Hours})
+$$
 
-- Se compararon modelos de clasificación para predecir si un estudiante se encuentra por encima o por debajo del promedio académico. Logistic Regression y LDA resultaron ser los modelos más eficaces, superando a métodos más complejos como SVM, Random Forest y XGBoost, incluso tras aplicar búsqueda de hiperparámetros. La simplicidad del problema, dominado por una única variable predictora fuerte, justificó el buen desempeño de modelos lineales.
-- Se construyó un modelo de regresión lineal utilizando únicamente la variable “horas de estudio por día”, excluyendo el nivel de estrés por su naturaleza determinística. Se obtuvo un coeficiente de determinación R² = 0.55, un valor satisfactorio para un modelo univariado en un contexto educativo, lo que sugiere un impacto fuerte y directo de esa variable sobre el GPA.
-- Se evaluó la predicción del nivel de estrés (bajo, moderado, alto), observándose un accuracy perfecto en modelos como XGBoost, dada la naturaleza de esta variable en el dataset original (calculada a partir de otras variables). LDA, al ser un modelo lineal, alcanzó un desempeño menor (accuracy = 0.77) lo cual sugiere que la ecuación utilizada para el cálculo del nivel de estrés es de caracter no lineal.
+### 3. Critical Assessment of Data Leakage
+
+Initial models (e.g., XGBoost) showed nearly perfect accuracy in predicting the *original* stress score. This was critically evaluated and attributed to the variable's deterministic calculation from other features in the dataset (a form of data leakage or circularity). This finding reinforces the commitment to **data integrity** and the difference between high model scores and true predictive power.
+
+## 🛠️ Technical Stack
+
+* **Language:** Python 3
+* **Core Libraries:** `pandas`, `numpy`, `scikit-learn` (for core ML), `xgboost` (for gradient boosting comparison), `matplotlib`, `seaborn` (for visualization).
+* **Skills Demonstrated:** Comparative model assessment, regression and multi-class classification, hyperparameter tuning, data visualization, and critical analysis of model performance metrics.
+
+## 📁 Repository Contents
+
+* `Predicción_de_promedio_academico_y_nivel_de_estrés_en_estudiantes.ipynb`: The complete analysis notebook containing all data preprocessing, visualization, model training, and comparative evaluation steps.
 
 ---
+**Authors:** Baltazar Salvatierra and Victoria Di Paolo
 
-**Autor:** Baltazar Salvatierra  y Victoria Di Paolo
